@@ -38,7 +38,7 @@ def install_erlang(user_name, download_directory):
     make_software(dir_name, download_directory)
     cmd = "cd %s;" % (download_directory)
     cmd += "cd otp_src_R13B04;"
-    #cmd += "make install > /dev/null 2>&1;"
+    cmd += "make install > /dev/null 2>&1;"
     return server.system(session_id,  cmd)
 
 
@@ -98,6 +98,13 @@ def create(server, session_id, account, username, app_name, autostart, extra_inf
         print "ImageMagick is already installed"
     except:
         print install_image_magick(account['username'], download_directory)
+
+    cmd = "ls ~/zotonic"
+    try:
+        server.system(session_id,  cmd)
+        print "Zotonic is already installed"
+    except:
+        print install_zotonic()
     
 
     # Create database for Zotonic using "extra_info" as the password
@@ -105,6 +112,7 @@ def create(server, session_id, account, username, app_name, autostart, extra_inf
     db_name = '%s_%s' % (username, app_name)
     server.create_db(session_id, db_name, 'postgresql', password)
 
+    server.create_app(session_id, app_name, 'Custom app (listening on port)', False, '') 
 
 def delete(server, session_id, account, username, app_name, autostart, extra_info):
     # Delete database

@@ -30,9 +30,13 @@ def install_erlang(user_name, download_directory):
     filename = "otp_src_R13B04.tar.gz"
     dir_name = "otp_src_R13B04"
     result = None
+    attempts = 0
     #resume download of Erlang until it is finished, to beat WebFAction timeout
     while not result:
+        if attempts > 20:
+            raise
         result = fetch_software("http://www.erlang.org/download/otp_src_R13B04.tar.gz", download_directory)
+        attempts = attempts + 1
     extract_software(filename, download_directory)
     configure_software(user_name, dir_name, download_directory)
     make_software(dir_name, download_directory)
@@ -46,8 +50,12 @@ def install_image_magick(user_name, download_directory):
     filename = "ImageMagick.tar.gz"
     dir_name = "ImageMagick-6.6.3-1"
     result = None
+    attempts = 0
     while not result:
+        if attempts > 20:
+            raise
         result = fetch_software("ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz", download_directory)
+        attempts = attempts + 1
     extract_software(filename, download_directory)
     configure_software(user_name, dir_name, download_directory)
     make_software(dir_name, download_directory) 

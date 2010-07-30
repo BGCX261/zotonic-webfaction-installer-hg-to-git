@@ -63,6 +63,8 @@ def install_mercurial():
 def install_zotonic():
     cmd = "cd;"
     cmd += "hg clone https://zotonic.googlecode.com/hg/ zotonic  > /dev/null 2>&1;"
+    cmd += "cd zotonic;"
+    cmd += "make"
     return server.system(session_id,  cmd)
 
 def create_downloads_directory(attempt=0):
@@ -108,11 +110,11 @@ def create(server, session_id, account, username, app_name, autostart, extra_inf
     
 
     # Create database for Zotonic using "extra_info" as the password
-    password = extra_info
-    db_name = '%s_%s' % (username, app_name)
-    server.create_db(session_id, db_name, 'postgresql', password)
+    #password = extra_info
+    #db_name = '%s_%s' % (username, app_name)
+    #server.create_db(session_id, db_name, 'postgresql', password)
 
-    server.create_app(session_id, app_name, 'Custom app (listening on port)', False, '') 
+    server.create_app(session_id, app_name, 'custom_app_with_port', False, '') 
 
 def delete(server, session_id, account, username, app_name, autostart, extra_info):
     # Delete database

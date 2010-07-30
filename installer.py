@@ -135,7 +135,7 @@ def delete(server, session_id, account, username, app_name, autostart, extra_inf
 if __name__ == '__main__':
     # Parse command line arguments
     #command, username, password, machine, app_name, autostart, extra_info = sys.argv[1:]
-    command, username, password, app_name, autostart, extra_info = sys.argv[1:]
+    command, username, password, machine, app_name, autostart, extra_info = sys.argv[1:]
     server = xmlrpclib.ServerProxy('https://api.webfaction.com/')
     session_id, account = server.login(username, password)
 

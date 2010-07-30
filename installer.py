@@ -110,10 +110,11 @@ def create(server, session_id, account, username, app_name, autostart, extra_inf
     
 
     # Create database for Zotonic using "extra_info" as the password
-    #password = extra_info
-    #db_name = '%s_%s' % (username, app_name)
-    #server.create_db(session_id, db_name, 'postgresql', password)
+    password = extra_info
+    db_name = '%s_%s' % (username, app_name)
+    server.create_db(session_id, db_name, 'postgresql', password)
 
+    #create an app for zotonic
     server.create_app(session_id, app_name, 'custom_app_with_port', False, '') 
 
 def delete(server, session_id, account, username, app_name, autostart, extra_info):

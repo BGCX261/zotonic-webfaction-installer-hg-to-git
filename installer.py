@@ -97,24 +97,24 @@ def create(server, session_id, account, username, app_name, autostart, extra_inf
     cmd = "ls ~/bin/erl"
     try:
         server.system(session_id,  cmd)
-        print "Erlang is already installed"
+        #print "Erlang is already installed"
     except:
-        print install_erlang(account['username'], download_directory)
+        install_erlang(account['username'], download_directory)
     
     #check for imagemagick and install if it is not present
     cmd = "ls ~/bin/convert"
     try:
         server.system(session_id,  cmd)
-        print "ImageMagick is already installed"
+        #print "ImageMagick is already installed"
     except:
-        print install_image_magick(account['username'], download_directory)
+        install_image_magick(account['username'], download_directory)
 
     cmd = "ls ~/zotonic"
     try:
         server.system(session_id,  cmd)
-        print "Zotonic is already installed"
+        #print "Zotonic is already installed"
     except:
-        print install_zotonic()
+        install_zotonic()
     
 
     # Create database for Zotonic using "extra_info" as the password
